@@ -1,0 +1,143 @@
+{% extends 'shop/basic.html' %}
+
+{% block title%}HOME{%endblock%}
+{% block css %}
+<style>
+
+  
+
+  .aone:visited{
+    color: gray;
+    text-decoration: none;
+  }
+  .aone:link{
+    color: gray;
+    text-decoration: none;
+  }
+
+  .aone:hover{
+    color: black;
+    text-decoration: none;
+  }
+
+
+  
+  .col-md-3 {
+    display: inline-block;
+    margin-left: -4px;
+  }
+
+  .carousel-indicators .active {
+    background-color: darkcyan;
+  }
+
+  .col-md-3 img {
+    width: 95%;
+    height: auto;
+  }
+
+  body .carousel-indicator li {
+    background-color: darkcyan;
+  }
+
+  .carousel-indicators li{
+    background-color: darkcyan;
+  }
+
+  body .carousel-indicators {
+    bottom: 0;
+  }
+
+  body .carousel-control-prev-icon,
+  body .carousel-control-next-icon {
+    background-color: darkcyan;
+  }
+
+
+  body .no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+
+</style>
+
+
+{% endblock %}
+
+{% block body %}
+<div style="text-align:center; background:url('/media/shop/images/back5.jpg') "><br><br><br><br><br><br>
+    <h1 style="font-size: 5.0em;color: #CD7574;"><b>the hearty store</b></h1>
+    <p style="font-size: 1.4em;">Connect with quality products!</p>
+    <a href="/shop/store"><button class="btn btn-info btn-lg px-4 " type="button">Shop Now</button></a>
+    <br><br><br><br><br><br><br>
+</div>
+<br>
+<hr>
+
+
+<div class="container">
+    
+    <!--Slideshow starts here -->
+    <br><h1 class="text-center my-2"><b>Featured Products</b></h1><br>
+    {% for product, range, nSlides in allProds %}
+  
+  
+    <div class="row">
+      <div id="demo{{forloop.counter}}" class="col carousel slide my-3" data-ride="carousel">
+        <ul class="carousel-indicators">
+          <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
+  
+          {% for i in range %}
+          <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
+          {% endfor %}
+        </ul>
+  
+  
+        <div class="container carousel-inner no-padding">
+          <div class="carousel-item active">
+            {% for i in product|slice:"0:"%}
+            <div class="col-xs-3 col-sm-3 col-md-3" style="margin-bottom:60px;padding-left: 0px;padding-right: 0px; margin-right: 0px;">
+              <div class="card" style="width: 18rem;">
+                <img src='/media/{{i.image}}' class="card-img-top" alt="..." style="margin-left:3px;">
+                <div class="card-body">
+                  <h5 class="card-title" id="namepr{{i.id}}">{{i.product_name}}</h5>
+                  <p class="card-text">{{i.desc|slice:"0:24"}}...</p>
+                  <h6 class="card-title">Price:
+                    <span>{{i.price}}</span>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+          </div>
+          <div class="carousel-item">
+            {% endif %}
+  
+            {% endfor %}
+          </div>
+  
+  
+  
+        </div>
+      </div>
+    
+  
+      <!-- left and right controls for the slide -->
+      <a class="carousel-control-prev " style="margin-top: 150px; top: auto; bottom: auto;" href="#demo{{forloop.counter}}" data-slide="prev">
+        <span class="carousel-control-prev-icon "></span>
+      </a>
+      <a class="carousel-control-next " style="margin-top: 150px; top: auto; bottom: auto;" href="#demo{{forloop.counter}}" data-slide="next">
+        <span class="carousel-control-next-icon "></span>
+      </a>
+    </div>
+
+    <div class="text-center"><i><a href="/shop/store/" class="aone">All Products</a></i></div>
+
+    <br><br>
+    {% endfor %}
+  
+  </div>
+
+
+{% endblock %}

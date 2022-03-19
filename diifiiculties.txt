@@ -1,0 +1,3 @@
+video 34 list of lists in view.py and index.py
+video 35 cat prods in view.py
+video 44 complete
